@@ -1,6 +1,7 @@
 {
   "version": 2,
   "name": "rdv-project",
+  "buildCommand": "node build-vercel.js",
   "builds": [
     {
       "src": "frontend/package.json",
