@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Upload Photo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="file"] {
+            display: block;
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #4361ee;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #3a56d4;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+            min-height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Test Upload Photo</h1>
+    
+    <form id="uploadForm">
+        <div class="form-group">
+            <label for="photo">Sélectionner une photo</label>
+            <input type="file" id="photo" name="photo" accept="image/*">
+        </div>
+        
+        <button type="submit">Envoyer</button>
+    </form>
+    
+    <div id="result">
+        <p>Le résultat s'affichera ici...</p>
+    </div>
+    
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData();
+            const fileInput = document.getElementById('photo');
+            
+            if (fileInput.files.length === 0) {
+                document.getElementById('result').innerHTML = '<p style="color: red;">Veuillez sélectionner un fichier</p>';
+                return;
+            }
+            
+            formData.append('photo', fileInput.files[0]);
+            
+            try {
+                document.getElementById('result').innerHTML = '<p>Envoi en cours...</p>';
+                
+                const response = await fetch('http://localhost:5000/api/professionnels/test-upload', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    document.getElementById('result').innerHTML = `
+                        <p style="color: green;">Fichier uploadé avec succès!</p>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>
+                    `;
+                } else {
+                    document.getElementById('result').innerHTML = `
+                        <p style="color: red;">Erreur: ${data.message}</p>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>
+                    `;
+                }
+            } catch (error) {
+                document.getElementById('result').innerHTML = `
+                    <p style="color: red;">Erreur: ${error.message}</p>
+                `;
+            }
+        });
+    </script>
+</body>
+</html></qodoArtifact>
+
+Ensuite, vérifions la configuration de votre middleware uploadConfig :
