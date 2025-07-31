@@ -1,23 +1,13 @@
 {
   "version": 2,
   "name": "rdv-project",
-  "buildCommand": "node build-vercel.js",
-  "builds": [
-    {
-      "src": "frontend/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "build"
-      }
-    },
-    {
-      "src": "backend/api/index.js",
-      "use": "@vercel/node",
-      "config": {
-        "maxDuration": 30
-      }
+  "buildCommand": "npm run build",
+  "outputDirectory": "frontend/build",
+  "functions": {
+    "backend/api/index.js": {
+      "maxDuration": 30
     }
-  ],
+  },
   "routes": [
     {
       "src": "/api/(.*)",
@@ -32,11 +22,5 @@
     "NODE_ENV": "production",
     "CI": "false",
     "GENERATE_SOURCEMAP": "false"
-  },
-  "build": {
-    "env": {
-      "CI": "false",
-      "GENERATE_SOURCEMAP": "false"
-    }
   }
 }
