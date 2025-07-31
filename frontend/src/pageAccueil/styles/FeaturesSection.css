@@ -1,0 +1,215 @@
+/* Styles pour la section des fonctionnalités - Version professionnelle */
+.features-section {
+  padding: 100px 5%;
+  background-color: var(--background-light);
+  position: relative;
+  overflow: hidden;
+}
+
+.features-section::before {
+  content: '';
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(78, 84, 200, 0.05) 0%, rgba(143, 148, 251, 0.05) 100%);
+  top: -150px;
+  right: -100px;
+  z-index: 1;
+}
+
+.features-section::after {
+  content: '';
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(78, 84, 200, 0.05) 0%, rgba(143, 148, 251, 0.05) 100%);
+  bottom: -100px;
+  left: -50px;
+  z-index: 1;
+}
+
+.section-header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 60px;
+  position: relative;
+  z-index: 2;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 20px;
+  color: var(--text-color);
+  position: relative;
+  display: inline-block;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  width: 80px;
+  height: 4px;
+  background: var(--primary-gradient);
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 2px;
+}
+
+.section-subtitle {
+  font-size: 1.2rem;
+  color: var(--text-light);
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.feature-card {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 2.5rem 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  transition: all 0.4s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+.feature-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  border-color: rgba(78, 84, 200, 0.2);
+}
+
+.feature-icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 70px;
+  height: 70px;
+  background: linear-gradient(135deg, rgba(78, 84, 200, 0.1) 0%, rgba(143, 148, 251, 0.1) 100%);
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.feature-card:hover .feature-icon-container {
+  background: var(--primary-gradient);
+}
+
+.feature-icon-container svg {
+  color: var(--primary-color);
+  transition: all 0.3s ease;
+}
+
+.feature-card:hover .feature-icon-container svg {
+  color: white;
+}
+
+.feature-icon {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.feature-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--text-color);
+  transition: all 0.3s ease;
+}
+
+.feature-card:hover .feature-title {
+  color: var(--primary-color);
+}
+
+.feature-description {
+  color: var(--text-light);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.feature-hover-effect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--primary-gradient);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+
+.feature-card:hover .feature-hover-effect {
+  transform: scaleX(1);
+}
+
+/* Animation au défilement */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.animate-on-scroll.animated {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Responsive design */
+@media (max-width: 992px) {
+  .features-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+  
+  .section-title {
+    font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .features-section {
+    padding: 70px 5%;
+  }
+  
+  .features-grid {
+    grid-template-columns: 1fr;
+    max-width: 500px;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+  }
+  
+  .section-subtitle {
+    font-size: 1.1rem;
+  }
+  
+  .feature-card {
+    padding: 2rem;
+  }
+}

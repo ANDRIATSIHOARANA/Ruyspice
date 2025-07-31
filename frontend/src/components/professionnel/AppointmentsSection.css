@@ -1,0 +1,533 @@
+/* Conteneur principal avec un design plus moderne */
+.appointments-container {
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  margin-bottom: 2.5rem;
+  overflow: hidden;
+  border: 1px solid #f0f0f0;
+}
+
+/* Titre de section avec un style plus élégant */
+.section-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #2d3748;
+  padding: 1.75rem;
+  margin: 0;
+  border-bottom: 1px solid #f0f0f0;
+  background: linear-gradient(to right, #f9f9f9, white);
+}
+
+/* Onglets avec un design plus moderne */
+.appointments-tabs {
+  display: flex;
+  border-bottom: 1px solid #f0f0f0;
+  background-color: #f9f9f9;
+  padding: 0 1rem;
+}
+
+/* Boutons d'onglet améliorés */
+.tab-button {
+  padding: 1.2rem 1.8rem;
+  background: none;
+  border: none;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #718096;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-right: 0.5rem;
+}
+
+.tab-button:hover {
+  color: #4c51bf;
+  background-color: rgba(78, 84, 200, 0.05);
+}
+
+.tab-button.active {
+  color: #4c51bf;
+  font-weight: 600;
+}
+
+.tab-button.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(to right, #4c51bf, #6366f1);
+  border-radius: 3px 3px 0 0;
+  box-shadow: 0 -2px 8px rgba(99, 102, 241, 0.2);
+}
+
+/* Badge de compteur amélioré */
+.tab-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  height: 24px;
+  padding: 0 8px;
+  background: linear-gradient(to bottom right, #4c51bf, #6366f1);
+  color: white;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  box-shadow: 0 2px 5px rgba(99, 102, 241, 0.3);
+}
+
+/* Contenu des onglets avec plus d'espace */
+.appointments-content {
+  padding: 2rem;
+}
+
+/* Grille de cartes de rendez-vous améliorée */
+.appointments-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.8rem;
+}
+
+/* Vue liste mobile compacte */
+.appointments-list-mobile {
+  display: none; /* Cachée par défaut */
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Cartes de rendez-vous avec un design plus élégant */
+.appointment-card {
+  border-radius: 12px;
+  border: 1px solid #edf2f7;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.appointment-card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  transform: translateY(-4px);
+}
+
+/* Styles spécifiques pour chaque type de rendez-vous */
+.appointment-card.pending {
+  border-left: 5px solid #f6e05e;
+  box-shadow: 0 4px 12px rgba(246, 224, 94, 0.1);
+}
+
+.appointment-card.confirme {
+  border-left: 5px solid #68d391;
+  box-shadow: 0 4px 12px rgba(104, 211, 145, 0.1);
+}
+
+.appointment-card.annule {
+  border-left: 5px solid #fc8181;
+  box-shadow: 0 4px 12px rgba(252, 129, 129, 0.1);
+}
+
+/* En-tête de carte amélioré */
+.appointment-header {
+  padding: 1.2rem;
+  background: linear-gradient(to right, #f9f9f9, white);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border-bottom: 1px solid #edf2f7;
+}
+
+/* Indicateur de statut plus visible */
+.appointment-status-indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.8);
+}
+
+.pending .appointment-status-indicator {
+  background-color: #f6e05e;
+  box-shadow: 0 0 0 2px rgba(246, 224, 94, 0.3);
+}
+
+.confirme .appointment-status-indicator {
+  background-color: #68d391;
+  box-shadow: 0 0 0 2px rgba(104, 211, 145, 0.3);
+}
+
+.annule .appointment-status-indicator {
+  background-color: #fc8181;
+  box-shadow: 0 0 0 2px rgba(252, 129, 129, 0.3);
+}
+
+/* Titre de rendez-vous plus visible */
+.appointment-title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2d3748;
+  flex-grow: 1;
+}
+
+/* Icônes de statut */
+.status-icon {
+  flex-shrink: 0;
+}
+
+.pending-icon {
+  color: #f6e05e;
+}
+
+.confirmed-icon {
+  color: #68d391;
+}
+
+.cancelled-icon {
+  color: #fc8181;
+}
+
+/* Détails du rendez-vous améliorés - MISE EN PAGE VERTICALE */
+.appointment-details {
+  padding: 1.2rem;
+  border-bottom: 1px solid #edf2f7;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  flex-grow: 1;
+}
+
+.appointment-detail-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.detail-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #718096;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.detail-value {
+  padding-left: 1.5rem;
+  color: #2d3748;
+  font-size: 0.95rem;
+  word-break: break-word;
+}
+
+.appointment-icon {
+  color: #718096;
+  min-width: 16px;
+}
+
+/* Section d'actions améliorée */
+.appointment-actions {
+  padding: 1.2rem;
+  display: flex;
+  gap: 0.85rem;
+  background-color: #fafafa;
+  border-top: 1px solid #edf2f7;
+  justify-content: flex-end;
+  margin-top: auto; /* Pousse les boutons vers le bas */
+}
+
+/* Boutons d'action améliorés */
+.action-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  min-width: 110px; /* Assure une largeur minimale pour les boutons */
+}
+
+/* Bouton Accepter */
+.action-button.accept {
+  background: linear-gradient(to bottom, #68d391, #48bb78);
+  color: white;
+}
+
+.action-button.accept:hover {
+  background: linear-gradient(to bottom, #48bb78, #38a169);
+  box-shadow: 0 4px 8px rgba(72, 187, 120, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Bouton Refuser */
+.action-button.reject {
+  background: linear-gradient(to bottom, #fc8181, #f56565);
+  color: white;
+}
+
+.action-button.reject:hover {
+  background: linear-gradient(to bottom, #f56565, #e53e3e);
+  box-shadow: 0 4px 8px rgba(245, 101, 101, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Bouton Supprimer */
+.action-button.delete {
+  background: linear-gradient(to bottom, #e2e8f0, #cbd5e0);
+  color: #4a5568;
+}
+
+.action-button.delete:hover {
+  background: linear-gradient(to bottom, #cbd5e0, #a0aec0);
+  box-shadow: 0 4px 8px rgba(160, 174, 192, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Message quand il n'y a pas de rendez-vous */
+.no-appointments {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 1rem;
+  color: #a0aec0;
+  text-align: center;
+  grid-column: 1 / -1;
+  background-color: #f9fafb;
+  border-radius: 12px;
+  border: 1px dashed #e2e8f0;
+}
+
+.empty-icon {
+  color: #cbd5e0;
+  margin-bottom: 1.2rem;
+  opacity: 0.7;
+}
+
+/* Vue mobile compacte pour les rendez-vous */
+.appointment-item-mobile {
+  background-color: white;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border-left: 4px solid #4c51bf;
+  transition: all 0.3s ease;
+}
+
+.appointment-item-mobile:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.appointment-item-mobile.pending {
+  border-left-color: #f6e05e;
+}
+
+.appointment-item-mobile.confirme {
+  border-left-color: #68d391;
+}
+
+.appointment-item-mobile.annule {
+  border-left-color: #fc8181;
+}
+
+.appointment-mobile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.75rem;
+}
+
+.appointment-mobile-status {
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.2rem 0.5rem;
+  border-radius: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.appointment-mobile-status.pending {
+  background-color: rgba(246, 224, 94, 0.2);
+  color: #d69e2e;
+}
+
+.appointment-mobile-status.confirme {
+  background-color: rgba(104, 211, 145, 0.2);
+  color: #38a169;
+}
+
+.appointment-mobile-status.annule {
+  background-color: rgba(252, 129, 129, 0.2);
+  color: #e53e3e;
+}
+
+.appointment-mobile-date {
+  font-size: 0.8rem;
+  color: #718096;
+  text-align: right;
+  line-height: 1.2;
+}
+
+.appointment-mobile-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.appointment-mobile-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+}
+
+.appointment-mobile-icon {
+  width: 16px;
+  height: 16px;
+  color: #4c51bf;
+  flex-shrink: 0;
+}
+
+.appointment-mobile-label {
+  font-weight: 600;
+  color: #2d3748;
+  min-width: 80px;
+}
+
+.appointment-mobile-value {
+  color: #718096;
+  flex: 1;
+}
+
+.appointment-mobile-reason {
+  background-color: #f7fafc;
+  padding: 0.5rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  color: #2d3748;
+  margin-top: 0.5rem;
+}
+
+.appointment-mobile-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid #edf2f7;
+}
+
+.action-button-mobile {
+  flex: 1;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  font-size: 0.8rem;
+  border: none;
+  text-align: center;
+}
+
+.action-button-mobile.accept {
+  background-color: rgba(104, 211, 145, 0.1);
+  color: #38a169;
+  border: 1px solid rgba(104, 211, 145, 0.3);
+}
+
+.action-button-mobile.accept:hover {
+  background-color: #38a169;
+  color: white;
+}
+
+.action-button-mobile.reject {
+  background-color: rgba(252, 129, 129, 0.1);
+  color: #e53e3e;
+  border: 1px solid rgba(252, 129, 129, 0.3);
+}
+
+.action-button-mobile.reject:hover {
+  background-color: #e53e3e;
+  color: white;
+}
+
+.action-button-mobile.delete {
+  background-color: rgba(160, 174, 192, 0.1);
+  color: #4a5568;
+  border: 1px solid rgba(160, 174, 192, 0.3);
+}
+
+.action-button-mobile.delete:hover {
+  background-color: #4a5568;
+  color: white;
+}
+
+/* Responsive design amélioré */
+@media (max-width: 768px) {
+  /* Masquer la grille de cartes sur mobile */
+  .appointments-list {
+    display: none !important;
+  }
+  
+  /* Afficher la liste mobile compacte */
+  .appointments-list-mobile {
+    display: flex !important;
+  }
+  
+  .appointments-tabs {
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 0;
+  }
+  
+  .tab-button {
+    padding: 1rem 1.2rem;
+    font-size: 0.9rem;
+  }
+  
+  .appointments-content {
+    padding: 1rem;
+  }
+  
+  .section-title {
+    padding: 1.25rem;
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .appointments-content {
+    padding: 0.75rem;
+  }
+  
+  .section-title {
+    padding: 1rem;
+    font-size: 1.1rem;
+  }
+  
+  .tab-button {
+    padding: 0.8rem 1rem;
+    font-size: 0.85rem;
+  }
+  
+  .appointment-mobile-actions {
+    flex-direction: column;
+  }
+  
+  .action-button-mobile {
+    margin-bottom: 0.25rem;
+  }
+}

@@ -1,0 +1,165 @@
+/* Styles pour la section d'appel à l'action */
+.cta-section {
+  position: relative;
+  padding: 100px 5%;
+  background: linear-gradient(135deg, #4e54c8 0%, #8f94fb 100%);
+  color: white;
+  overflow: hidden;
+}
+
+.cta-container {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  z-index: 10;
+}
+
+.cta-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+}
+
+.cta-subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 2.5rem;
+  opacity: 0.9;
+}
+
+.cta-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.cta-button {
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+
+.cta-button.primary {
+  background: white;
+  color: #4e54c8;
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+}
+
+.cta-button.primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 7px 20px rgba(255, 255, 255, 0.4);
+}
+
+.cta-button.secondary {
+  background: transparent;
+  color: white;
+  border: 2px solid white;
+}
+
+.cta-button.secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-3px);
+}
+
+.btn-arrow {
+  margin-left: 8px;
+  transition: transform 0.3s ease;
+}
+
+.cta-button:hover .btn-arrow {
+  transform: translateX(5px);
+}
+
+.cta-features {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.cta-feature {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.feature-check {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  font-size: 0.8rem;
+}
+
+/* Formes décoratives */
+.cta-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.cta-shape {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.shape-1 {
+  width: 300px;
+  height: 300px;
+  top: -150px;
+  left: -100px;
+}
+
+.shape-2 {
+  width: 200px;
+  height: 200px;
+  bottom: -50px;
+  right: 10%;
+}
+
+.shape-3 {
+  width: 150px;
+  height: 150px;
+  top: 30%;
+  right: -50px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .cta-title {
+    font-size: 2rem;
+  }
+  
+  .cta-subtitle {
+    font-size: 1.1rem;
+  }
+  
+  .cta-buttons {
+    flex-direction: column;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .cta-button {
+    width: 100%;
+  }
+  
+  .cta-features {
+    flex-direction: column;
+    align-items: center;
+  }
+}

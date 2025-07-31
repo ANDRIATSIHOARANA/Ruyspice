@@ -1,0 +1,2 @@
+# Ignore MediaPipe packages
+node_modules/@mediapipe/**/*

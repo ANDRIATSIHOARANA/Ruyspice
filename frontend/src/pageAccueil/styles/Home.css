@@ -1,0 +1,376 @@
+/* Home.css - Styles pour la page d'accueil */
+
+:root {
+  --primary-color: #4e54c8;
+  --primary-gradient: linear-gradient(135deg, #4e54c8 0%, #8f94fb 100%);
+  --secondary-color: #ff6b6b;
+  --text-color: #333333;
+  --text-light: #666666;
+  --background-light: #f8f9fa;
+  --white: #ffffff;
+  --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 6px 12px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 15px 25px rgba(0, 0, 0, 0.1);
+  --border-radius: 12px;
+  --transition: all 0.3s ease;
+}
+
+.home-container {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  color: var(--text-color);
+  line-height: 1.6;
+  overflow-x: hidden;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  position: relative;
+}
+
+.home-container.loaded {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Styles pour les sections */
+section {
+  padding: 100px 5%;
+  position: relative;
+}
+
+.section-header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 60px;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 20px;
+  color: var(--text-color);
+  position: relative;
+  display: inline-block;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  width: 80px;
+  height: 4px;
+  background: var(--primary-gradient);
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 2px;
+}
+
+.section-subtitle {
+  font-size: 1.2rem;
+  color: var(--text-light);
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* Animations au défilement */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.animate-on-scroll.animated {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Styles pour les boutons */
+.btn, .cta-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 28px;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: var(--transition);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn-primary, .cta-button.primary {
+  background: var(--primary-gradient);
+  color: var(--white);
+  box-shadow: 0 4px 15px rgba(78, 84, 200, 0.4);
+}
+
+.btn-primary:hover, .cta-button.primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 7px 20px rgba(78, 84, 200, 0.5);
+}
+
+.btn-secondary, .cta-button.secondary {
+  background: transparent;
+  color: var(--primary-color);
+  border: 2px solid var(--primary-color);
+}
+
+.btn-secondary:hover, .cta-button.secondary:hover {
+  background: rgba(78, 84, 200, 0.1);
+  transform: translateY(-3px);
+}
+
+.btn-arrow {
+  margin-left: 8px;
+  transition: transform 0.3s ease;
+}
+
+.btn:hover .btn-arrow, .cta-button:hover .btn-arrow {
+  transform: translateX(5px);
+}
+
+/* Styles pour la personne 3D */
+.person-3d {
+  position: fixed;
+  width: 80px;
+  height: 120px;
+  right: 30px;
+  bottom: 30px;
+  z-index: 1000;
+  cursor: pointer;
+  transition: top 0.5s ease, left 0.8s ease, transform 0.3s ease;
+  filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.2));
+  pointer-events: auto; /* Assure que les clics sont détectés */
+  will-change: transform, top, left;
+}
+
+.person-3d img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+/* Trace de mouvement */
+.person-3d::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 10px;
+  background: linear-gradient(90deg, rgba(78, 84, 200, 0) 0%, rgba(78, 84, 200, 0.3) 50%, rgba(78, 84, 200, 0) 100%);
+  bottom: -10px;
+  left: 0;
+  border-radius: 50%;
+  filter: blur(5px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.person-3d.walking-down::after,
+.person-3d.walking-up::after {
+  opacity: 0.7;
+}
+
+/* Animation d'inactivité */
+.person-3d.idle img {
+  animation: float-person 3s ease-in-out infinite;
+}
+
+@keyframes float-person {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(1deg);
+  }
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+}
+
+/* Animation de marche vers le bas */
+.person-3d.walking-down img {
+  animation: walk-down 0.6s infinite;
+}
+
+@keyframes walk-down {
+  0% {
+    transform: translateY(0) rotate(2deg) scaleY(1);
+  }
+  25% {
+    transform: translateY(3px) rotate(3deg) scaleY(0.98);
+  }
+  50% {
+    transform: translateY(0) rotate(2deg) scaleY(1);
+  }
+  75% {
+    transform: translateY(3px) rotate(1deg) scaleY(0.98);
+  }
+  100% {
+    transform: translateY(0) rotate(2deg) scaleY(1);
+  }
+}
+
+/* Animation de marche vers le haut */
+.person-3d.walking-up img {
+  animation: walk-up 0.6s infinite;
+}
+
+@keyframes walk-up {
+  0% {
+    transform: translateY(0) rotate(-2deg) scaleY(1);
+  }
+  25% {
+    transform: translateY(-3px) rotate(-3deg) scaleY(1.02);
+  }
+  50% {
+    transform: translateY(0) rotate(-2deg) scaleY(1);
+  }
+  75% {
+    transform: translateY(-3px) rotate(-1deg) scaleY(1.02);
+  }
+  100% {
+    transform: translateY(0) rotate(-2deg) scaleY(1);
+  }
+}
+
+/* Effet de grimpe */
+.person-3d.walking-up::before {
+  content: '';
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background-color: rgba(78, 84, 200, 0.1);
+  border-radius: 50%;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: climbing-effect 0.6s infinite;
+}
+
+@keyframes climbing-effect {
+  0%, 100% {
+    opacity: 0.3;
+    transform: translateX(-50%) scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: translateX(-50%) scale(1.2);
+  }
+}
+
+/* Animation Macarena */
+.person-3d.macarena img {
+  animation: macarena 1.2s infinite;
+}
+
+@keyframes macarena {
+  0% {
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+  10% {
+    transform: translateY(-5px) rotate(5deg) scale(1.05);
+  }
+  20% {
+    transform: translateY(0) rotate(-5deg) scale(1);
+  }
+  30% {
+    transform: translateY(-5px) rotate(5deg) scale(1.05);
+  }
+  40% {
+    transform: translateY(0) rotate(-5deg) scale(1);
+  }
+  50% {
+    transform: translateY(-5px) rotate(5deg) scale(1.05);
+  }
+  60% {
+    transform: translateY(0) rotate(-5deg) scale(1);
+  }
+  70% {
+    transform: translateY(-5px) rotate(5deg) scale(1.05);
+  }
+  80% {
+    transform: translateY(0) rotate(-5deg) scale(1);
+  }
+  90% {
+    transform: translateY(-5px) rotate(5deg) scale(1.05);
+  }
+  100% {
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+}
+
+/* Effet Macarena */
+.macarena-effect {
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  right: -20px;
+  bottom: -20px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(78, 84, 200, 0.2) 0%, rgba(78, 84, 200, 0) 70%);
+  animation: pulse-effect 1s infinite;
+  z-index: -1;
+}
+
+@keyframes pulse-effect {
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.3;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+}
+
+/* Responsive design */
+@media (max-width: 992px) {
+  section {
+    padding: 80px 5%;
+  }
+  
+  .section-title {
+    font-size: 2.2rem;
+  }
+  
+  .person-3d {
+    width: 70px;
+    height: 105px;
+    right: 20px;
+    bottom: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  section {
+    padding: 60px 5%;
+  }
+  
+  .section-title {
+    font-size: 1.8rem;
+  }
+  
+  .section-subtitle {
+    font-size: 1rem;
+  }
+  
+  .person-3d {
+    width: 60px;
+    height: 90px;
+    right: 15px;
+    bottom: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .person-3d {
+    width: 50px;
+    height: 75px;
+    right: 10px;
+    bottom: 10px;
+  }
+}

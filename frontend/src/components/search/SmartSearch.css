@@ -1,0 +1,597 @@
+/* Styles de base pour le conteneur principal - PREMIÈRE COUCHE */
+.smart-search-container {
+  position: relative;
+  width: 100%;
+  max-width: 650px;
+  margin: 0 auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  border-radius: 20px;
+  background: white;
+  padding: 12px 12px; /* Augmenté pour couvrir les autres couches */
+  transition: all 0.3s ease;
+  z-index: 50;
+  overflow: visible; /* Assure que les éléments enfants peuvent déborder */
+}
+
+/* Bouton pour fermer la barre de recherche */
+.close-search-button {
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  width: 30px;
+  height: 30px;
+  background-color: #4a90e2;
+  border: 2px solid white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  transition: all 0.2s ease;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  padding: 0;
+}
+
+.close-search-button:hover {
+  background-color: #3a80d2;
+  transform: scale(1.1);
+}
+
+.close-search-button:active {
+  transform: scale(0.95);
+}
+
+.smart-search-container:hover, 
+.smart-search-container:focus-within {
+  box-shadow: 0 8px 28px rgba(74, 144, 226, 0.2);
+  transform: translateY(-2px);
+}
+
+/* Formulaire de recherche - DEUXIÈME COUCHE */
+.search-form {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  position: relative;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  margin: 0; /* Supprime les marges */
+  padding: 0; /* Supprime le padding */
+}
+
+/* Conteneur de l'input de recherche - TROISIÈME COUCHE */
+.search-input-container {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  position: relative;
+  background-color: #f5f8ff;
+  border-radius: 18px;
+  padding: 0 8px;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  height: 48px;
+  min-width: 250px;
+  margin-right: 20px; /* Assure un espace entre l'input et le bouton */
+}
+
+.search-input-container.focused {
+  background-color: #ffffff;
+  border-color: #4a90e2;
+  box-shadow: 0 0 0 4px rgba(74, 144, 226, 0.15);
+}
+
+/* Icône de recherche */
+.search-icon-prefix {
+  font-size: 16px;
+  margin-right: 10px;
+  color: #4a90e2;
+  animation: pulse 2s infinite ease-in-out;
+  flex-shrink: 0;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+}
+
+/* Input de recherche */
+.search-input {
+  flex: 1;
+  padding: 12px 0;
+  border: none;
+  background: transparent;
+  font-size: 15px;
+  outline: none;
+  color: #333;
+  width: calc(100% - 60px); /* Réduit pour laisser plus d'espace au bouton */
+  margin-right: 40px; /* Augmenté pour le bouton de fermeture */
+}
+
+.search-input::placeholder {
+  color: #8a9bbd;
+  transition: color 0.2s;
+  font-style: italic;
+}
+
+.search-input:focus::placeholder {
+  color: #b0c2e1;
+}
+
+/* Bouton pour effacer la recherche - AMÉLIORÉ */
+.clear-search-button {
+  position: absolute;
+  right: 14px; /* Ajusté pour être plus visible */
+  top: 50%;
+  transform: translateY(-50%);
+  width: 30px; /* Augmenté pour être plus visible */
+  height: 30px; /* Augmenté pour être plus visible */
+  background-color: #d1ddf5; /* Couleur plus visible */
+  border: 2px solid #b0c2e1; /* Bordure ajoutée pour plus de contraste */
+  border-radius: 50%;
+  display: flex !important; /* Forcer l'affichage */
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #4a5568;
+  font-size: 18px; /* Augmenté pour être plus visible */
+  font-weight: bold;
+  transition: all 0.2s ease;
+  z-index: 999; /* Augmenté pour être au-dessus de tout */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15); /* Ombre plus prononcée */
+  margin-left: 6px;
+  pointer-events: auto !important; /* Assurer que le bouton est cliquable */
+  opacity: 1 !important; /* Forcer l'opacité */
+  visibility: visible !important; /* Forcer la visibilité */
+}
+
+.clear-search-button:hover {
+  background-color: #b0c2e1;
+  color: #2d3748;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.clear-search-button:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+/* Animation pour attirer l'attention sur le bouton */
+@keyframes pulse-button {
+  0% {
+    box-shadow: 0 0 0 0 rgba(74, 144, 226, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(74, 144, 226, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(74, 144, 226, 0);
+  }
+}
+
+.clear-search-button {
+  animation: pulse-button 2s infinite;
+}
+
+/* Bouton de recherche */
+.search-button {
+  background: linear-gradient(135deg, #4a90e2 0%, #3a80d2 100%);
+  color: white;
+  border: none;
+  border-radius: 18px;
+  padding: 12px 22px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  transition: all 0.3s;
+  box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  flex-shrink: 0;
+  white-space: nowrap;
+  margin: 0; /* Supprime les marges */
+}
+
+.search-button:hover {
+  background: linear-gradient(135deg, #3a80d2 0%, #2a70c2 100%);
+  box-shadow: 0 6px 16px rgba(74, 144, 226, 0.4);
+  transform: translateY(-2px);
+}
+
+.search-button:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 8px rgba(74, 144, 226, 0.3);
+}
+
+/* Conteneur des suggestions */
+.search-suggestions {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  right: 0;
+  background: white;
+  border-radius: 14px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+  z-index: 1000;
+  max-height: 450px;
+  overflow-y: auto;
+  padding: 16px;
+  animation: slideDown 0.3s ease-out;
+  border: 1px solid rgba(74, 144, 226, 0.1);
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Titre des suggestions */
+.suggestions-title {
+  margin: 0 0 14px;
+  font-size: 15px;
+  color: #4a5568;
+  font-weight: 600;
+  position: relative;
+  padding-bottom: 6px;
+}
+
+.suggestions-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 36px;
+  height: 3px;
+  background: linear-gradient(90deg, #4a90e2, #6ab0ff);
+  border-radius: 3px;
+}
+
+/* Listes de suggestions et catégories */
+.suggestions-list, .categories-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.suggestion-item {
+  margin-bottom: 8px;
+  transition: transform 0.2s;
+}
+
+.suggestion-item:hover {
+  transform: translateX(5px);
+}
+
+/* Lien de suggestion */
+.suggestion-link {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s;
+  background-color: #f8faff;
+  border: 1px solid transparent;
+  cursor: pointer;
+  position: relative;
+  width: 100%;
+  text-align: left;
+}
+
+.suggestion-link:hover {
+  background-color: #edf2ff;
+  border-color: #d1e0ff;
+}
+
+/* Avatar de suggestion */
+.suggestion-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  margin-right: 14px;
+  overflow: hidden;
+  background-color: #e0e8ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: #4a90e2;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  border: 2px solid white;
+  flex-shrink: 0;
+}
+
+.suggestion-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatar-placeholder {
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
+/* Informations de suggestion */
+.suggestion-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.suggestion-name {
+  font-weight: 600;
+  margin-bottom: 3px;
+  color: #2d3748;
+  font-size: 15px;
+}
+
+.suggestion-specialties {
+  font-size: 13px;
+  color: #4a90e2;
+  margin-bottom: 3px;
+}
+
+.suggestion-location {
+  font-size: 12px;
+  color: #718096;
+  display: flex;
+  align-items: center;
+}
+
+.suggestion-location span[role="img"] {
+  margin-right: 4px;
+  font-size: 12px;
+}
+
+/* Bouton de visualisation du profil */
+.view-profile-button {
+  display: flex;
+  align-items: center;
+  background-color: rgba(74, 144, 226, 0.1);
+  color: #4a90e2;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  transition: all 0.2s;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.suggestion-link:hover .view-profile-button {
+  background-color: #4a90e2;
+  color: white;
+}
+
+.arrow-icon {
+  margin-left: 5px;
+  transition: transform 0.2s;
+}
+
+.suggestion-link:hover .arrow-icon {
+  transform: translateX(4px);
+}
+
+/* Indicateur de recherche */
+.searching-indicator {
+  display: flex;
+  justify-content: center;
+  padding: 24px 0;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  background: linear-gradient(135deg, #4a90e2 0%, #3a80d2 100%);
+  border-radius: 50%;
+  margin: 0 4px;
+  animation: bounce 1.5s infinite ease-in-out;
+}
+
+.dot:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* Message d'absence de suggestions */
+.no-suggestions {
+  padding: 16px;
+  text-align: center;
+  color: #4a5568;
+  background-color: #f8faff;
+  border-radius: 10px;
+  margin-top: 8px;
+}
+
+.no-suggestions p {
+  margin: 6px 0;
+}
+
+.no-suggestions p:first-child {
+  font-weight: 600;
+  color: #2d3748;
+}
+
+/* Styles pour les catégories */
+.categories-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.category-item {
+  margin-bottom: 0;
+}
+
+.category-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  background-color: #f8faff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+}
+
+.category-button:hover {
+  background-color: #edf2ff;
+  border-color: #4a90e2;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(74, 144, 226, 0.15);
+}
+
+.category-icon {
+  font-size: 28px;
+  margin-bottom: 10px;
+  transition: transform 0.3s;
+}
+
+.category-button:hover .category-icon {
+  transform: scale(1.15);
+}
+
+.category-name {
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+  color: #4a5568;
+  transition: color 0.3s;
+}
+
+.category-button:hover .category-name {
+  color: #4a90e2;
+}
+
+/* Conseil de recherche */
+.search-tip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  background-color: #edf2ff;
+  border-radius: 10px;
+  margin-top: 14px;
+  font-size: 13px;
+  color: #4a5568;
+  border: 1px dashed #b0c2e1;
+}
+
+.tip-icon {
+  margin-right: 8px;
+  font-size: 16px;
+  animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    opacity: 0.7;
+    text-shadow: 0 0 4px rgba(74, 144, 226, 0.5);
+  }
+  to {
+    opacity: 1;
+    text-shadow: 0 0 12px rgba(74, 144, 226, 0.8);
+  }
+}
+
+/* Scrollbar personnalisée */
+.search-suggestions::-webkit-scrollbar {
+  width: 6px;
+}
+
+.search-suggestions::-webkit-scrollbar-track {
+  background: #f1f5fd;
+  border-radius: 8px;
+}
+
+.search-suggestions::-webkit-scrollbar-thumb {
+  background: #c5d5f0;
+  border-radius: 8px;
+}
+
+.search-suggestions::-webkit-scrollbar-thumb:hover {
+  background: #a3bde6;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .smart-search-container {
+    max-width: 100%;
+    border-radius: 14px;
+  }
+  
+  .search-button {
+    padding: 12px 18px;
+  }
+}
+
+@media (max-width: 576px) {
+  .search-form {
+    flex-direction: column;
+  }
+  
+  .search-input-container {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+  
+  .search-button {
+    width: 100%;
+    padding: 10px;
+  }
+  
+  .categories-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .search-suggestions {
+    max-height: 65vh;
+  }
+}

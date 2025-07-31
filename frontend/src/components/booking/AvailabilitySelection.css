@@ -1,0 +1,250 @@
+.availability-selection-container {
+  padding: 1.5rem;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.availability-selection-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.back-button {
+  background: none;
+  border: none;
+  color: #007bff;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  margin-right: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.back-button:hover {
+  text-decoration: underline;
+}
+
+.availability-selection-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+  flex-grow: 1;
+  text-align: center;
+}
+
+.professional-info-summary {
+  display: flex;
+  align-items: center;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.professional-avatar-small {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 1rem;
+  background-color: #e9ecef;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.professional-avatar-small img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatar-placeholder-small {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #6c757d;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.professional-details-small {
+  flex-grow: 1;
+}
+
+.professional-details-small h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.1rem;
+  color: #212529;
+}
+
+.professional-details-small p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #6c757d;
+}
+
+.date-selector {
+  margin-bottom: 1.5rem;
+}
+
+.date-selector h3 {
+  font-size: 1.1rem;
+  color: #495057;
+  margin-bottom: 1rem;
+}
+
+.date-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.date-button {
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  color: #495057;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.date-button:hover {
+  background-color: #e9ecef;
+  border-color: #ced4da;
+}
+
+.date-button.selected {
+  background-color: #007bff;
+  border-color: #007bff;
+  color: white;
+}
+
+.time-slots-container {
+  margin-top: 1.5rem;
+}
+
+.time-slots-container h3 {
+  font-size: 1.1rem;
+  color: #495057;
+  margin-bottom: 1rem;
+}
+
+.time-slots-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 1rem;
+}
+
+.time-slot-button {
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  padding: 0.75rem 0.5rem;
+  font-size: 0.9rem;
+  color: #495057;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.time-slot-button:hover {
+  background-color: #e9ecef;
+  border-color: #ced4da;
+}
+
+.time-slot-button:active, .time-slot-button:focus {
+  background-color: #007bff;
+  border-color: #007bff;
+  color: white;
+  outline: none;
+}
+
+.loading-container, .empty-container {
+  padding: 2rem;
+  text-align: center;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  margin: 1rem 0;
+}
+
+.loading-container {
+  color: #6c757d;
+}
+
+.empty-container {
+  color: #6c757d;
+}
+
+.empty-container p {
+  margin: 0.5rem 0;
+}
+
+.empty-container .back-button {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  color: #007bff;
+  text-decoration: none;
+}
+
+.empty-container .back-button:hover {
+  background-color: #e9ecef;
+  text-decoration: none;
+}
+
+/* Animation */
+.availability-selection-container {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .date-buttons {
+    flex-direction: column;
+  }
+  
+  .time-slots-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .availability-selection-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .availability-selection-title {
+    margin-top: 1rem;
+    text-align: left;
+  }
+}
+
+@media (max-width: 480px) {
+  .time-slots-grid {
+    grid-template-columns: 1fr;
+  }
+}
