@@ -408,24 +408,23 @@ const Character3D = ({
         {showGround && <Ground />}
         
         {/* Model with loading suspense */}
-        <ErrorBoundary fallback={
-          <mesh>
-            <sphereGeometry args={[1, 16, 16]} />
-            <meshStandardMaterial color="red" wireframe />
-          </mesh>
-        }>
-          <Suspense fallback={<LoadingModel />}>
-            <Model 
-              ref={modelRef}
-              url={url}
-              animation={animation}
-              position={position}
-              scale={scale}
-              rotation={rotation}
-              initialFacingFront={initialFacingFront}
-            />
-          </Suspense>
-        </ErrorBoundary>
+        {useFallback ? (
+          <SimpleCharacter />
+        ) : (
+          <ErrorBoundary fallback={<SimpleCharacter />}>
+            <Suspense fallback={<LoadingModel />}>
+              <Model 
+                ref={modelRef}
+                url={url}
+                animation={animation}
+                position={position}
+                scale={scale}
+                rotation={rotation}
+                initialFacingFront={initialFacingFront}
+              />
+            </Suspense>
+          </ErrorBoundary>
+        )}
         
         {/* Orbit controls - enabled based on prop */}
         {enableControls && <OrbitControls 
