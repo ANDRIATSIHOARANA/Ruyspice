@@ -282,6 +282,42 @@ const SceneLighting = React.memo(({ shadowMapSize = 512 }) => {
   );
 });
 
+// Simple 3D character fallback component
+const SimpleCharacter = React.memo(() => {
+  return (
+    <group>
+      {/* Body */}
+      <mesh position={[0, 0, 0]}>
+        <boxGeometry args={[0.8, 1.6, 0.4]} />
+        <meshStandardMaterial color="#4A90E2" />
+      </mesh>
+      {/* Head */}
+      <mesh position={[0, 0.9, 0.1]}>
+        <sphereGeometry args={[0.3, 16, 16]} />
+        <meshStandardMaterial color="#FFB6C1" />
+      </mesh>
+      {/* Arms */}
+      <mesh position={[-0.5, 0.2, 0]}>
+        <boxGeometry args={[0.2, 1, 0.2]} />
+        <meshStandardMaterial color="#4A90E2" />
+      </mesh>
+      <mesh position={[0.5, 0.2, 0]}>
+        <boxGeometry args={[0.2, 1, 0.2]} />
+        <meshStandardMaterial color="#4A90E2" />
+      </mesh>
+      {/* Legs */}
+      <mesh position={[-0.2, -1.2, 0]}>
+        <boxGeometry args={[0.2, 1.2, 0.2]} />
+        <meshStandardMaterial color="#2C3E50" />
+      </mesh>
+      <mesh position={[0.2, -1.2, 0]}>
+        <boxGeometry args={[0.2, 1.2, 0.2]} />
+        <meshStandardMaterial color="#2C3E50" />
+      </mesh>
+    </group>
+  );
+});
+
 // Main component that encapsulates the Three.js Canvas - optimized with useMemo
 const Character3D = ({ 
   url = "/assets/models/character.fbx",
@@ -296,7 +332,8 @@ const Character3D = ({
   backgroundColor = null,
   highPerformance = false, // New prop for performance mode
   shadowMapSize = 1024, // Configurable shadow quality
-  initialFacingFront = true // New prop to control initial facing direction
+  initialFacingFront = true, // New prop to control initial facing direction
+  useFallback = false // New prop to force using simple character
 }) => {
   const modelRef = useRef();
   

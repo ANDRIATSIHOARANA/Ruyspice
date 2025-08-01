@@ -106,6 +106,8 @@ const HeroSection = () => {
           onClick={handleCharacterClick}
           style={{ width: '100%', height: '100%' }}
           showGround={false}
+          useFallback={true}
+          highPerformance={true}
         />
       </div>
       
