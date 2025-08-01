@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test API - RDV Project</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .test-section h3 {
+            margin-top: 0;
+            color: #4A90E2;
+        }
+        button {
+            background: #4A90E2;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #357ABD;
+        }
+        .result {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Test API - RDV Project</h1>
+        <p>Cette page permet de tester la connectivité avec l'API backend.</p>
+        
+        <div class="test-section">
+            <h3>🌐 Test de connectivité API</h3>
+            <p>Teste si l'API backend est accessible.</p>
+            <button onclick="testApiConnection()">Tester la connexion API</button>
+            <div id="api-result" class="result" style="display: none;"></div>
+        </div>
+        
+        <div class="test-section">
+            <h3>📋 Test des catégories</h3>
+            <p>Récupère la liste des catégories disponibles.</p>
+            <button onclick="testCategories()">Récupérer les catégories</button>
+            <div id="categories-result" class="result" style="display: none;"></div>
+        </div>
+        
+        <div class="test-section">
+            <h3>👥 Test d'inscription</h3>
+            <p>Teste l'inscription d'un utilisateur de test.</p>
+            <button onclick="testRegistration()">Tester l'inscription</button>
+            <div id="registration-result" class="result" style="display: none;"></div>
+        </div>
+        
+        <div class="test-section">
+            <h3>🔑 Test de connexion</h3>
+            <p>Teste la connexion avec des identifiants de test.</p>
+            <button onclick="testLogin()">Tester la connexion</button>
+            <div id="login-result" class="result" style="display: none;"></div>
+        </div>
+        
+        <div class="test-section">
+            <h3>ℹ️ Informations de configuration</h3>
+            <p>Affiche les URLs et configurations utilisées.</p>
+            <button onclick="showConfig()">Afficher la configuration</button>
+            <div id="config-result" class="result" style="display: none;"></div>
+        </div>
+    </div>
+
+    <script>
+        // Configuration API
+        const API_BASE_URL = 'https://ruyspice.vercel.app/api';
+        
+        function showResult(elementId, content, type = 'info') {
+            const element = document.getElementById(elementId);
+            element.className = `result ${type}`;
+            element.textContent = content;
+            element.style.display = 'block';
+        }
+        
+        async function testApiConnection() {
+            try {
+                showResult('api-result', 'Test en cours...', 'info');
+                
+                const response = await fetch(`${API_BASE_URL}/health`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    showResult('api-result', `✅ API accessible!\nStatut: ${response.status}\nRéponse: ${JSON.stringify(data, null, 2)}`, 'success');
+                } else {
+                    showResult('api-result', `⚠️ API accessible mais erreur\nStatut: ${response.status}\nMessage: ${response.statusText}`, 'error');
+                }
+            } catch (error) {
+                showResult('api-result', `❌ Erreur de connexion API\nErreur: ${error.message}\nURL testée: ${API_BASE_URL}/health`, 'error');
+            }
+        }
+        
+        async function testCategories() {
+            try {
+                showResult('categories-result', 'Récupération des catégories...', 'info');
+                
+                const response = await fetch(`${API_BASE_URL}/categories`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    showResult('categories-result', `✅ Catégories récupérées!\nNombre: ${data.length || 'N/A'}\nDonnées: ${JSON.stringify(data, null, 2)}`, 'success');
+                } else {
+                    const errorText = await response.text();
+                    showResult('categories-result', `⚠️ Erreur lors de la récupération\nStatut: ${response.status}\nErreur: ${errorText}`, 'error');
+                }
+            } catch (error) {
+                showResult('categories-result', `❌ Erreur de connexion\nErreur: ${error.message}`, 'error');
+            }
+        }
+        
+        async function testRegistration() {
+            try {
+                showResult('registration-result', 'Test d\'inscription...', 'info');
+                
+                const testUser = {
+                    email: `test_${Date.now()}@example.com`,
+                    password: 'TestPassword123!',
+                    prenom: 'Test',
+                    nom: 'User',
+                    telephone: '0123456789'
+                };
+                
+                const response = await fetch(`${API_BASE_URL}/utilisateurs/inscription`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(testUser)
+                });
+                
+                const responseText = await response.text();
+                
+                if (response.ok) {
+                    showResult('registration-result', `✅ Inscription réussie!\nStatut: ${response.status}\nRéponse: ${responseText}`, 'success');
+                } else {
+                    showResult('registration-result', `⚠️ Erreur d'inscription\nStatut: ${response.status}\nErreur: ${responseText}`, 'error');
+                }
+            } catch (error) {
+                showResult('registration-result', `❌ Erreur de connexion\nErreur: ${error.message}`, 'error');
+            }
+        }
+        
+        async function testLogin() {
+            try {
+                showResult('login-result', 'Test de connexion...', 'info');
+                
+                const credentials = {
+                    email: 'admin@test.com',
+                    password: 'admin123'
+                };
+                
+                const response = await fetch(`${API_BASE_URL}/utilisateurs/connexion`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(credentials)
+                });
+                
+                const responseText = await response.text();
+                
+                if (response.ok) {
+                    showResult('login-result', `✅ Connexion réussie!\nStatut: ${response.status}\nRéponse: ${responseText}`, 'success');
+                } else {
+                    showResult('login-result', `⚠️ Erreur de connexion\nStatut: ${response.status}\nErreur: ${responseText}`, 'error');
+                }
+            } catch (error) {
+                showResult('login-result', `❌ Erreur de connexion\nErreur: ${error.message}`, 'error');
+            }
+        }
+        
+        function showConfig() {
+            const config = {
+                'URL API': API_BASE_URL,
+                'URL actuelle': window.location.href,
+                'User Agent': navigator.userAgent,
+                'Timestamp': new Date().toISOString()
+            };
+            
+            showResult('config-result', JSON.stringify(config, null, 2), 'info');
+        }
+    </script>
+</body>
+</html>
