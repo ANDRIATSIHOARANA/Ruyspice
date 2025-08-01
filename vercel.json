@@ -9,6 +9,35 @@
       }
     }
   ],
+  "headers": [
+    {
+      "source": "/(.*\\.fbx)",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/octet-stream"
+        }
+      ]
+    },
+    {
+      "source": "/(.*\\.glb)",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "model/gltf-binary"
+        }
+      ]
+    },
+    {
+      "source": "/(.*\\.gltf)",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "model/gltf+json"
+        }
+      ]
+    }
+  ],
   "routes": [
     {
       "src": "/static/(.*)",
@@ -19,7 +48,7 @@
       "dest": "/$1"
     },
     {
-      "src": "/(.*\\.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot))$",
+      "src": "/(.*\\.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot|fbx|glb|gltf))$",
       "dest": "/$1"
     },
     {

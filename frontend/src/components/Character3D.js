@@ -184,11 +184,30 @@ function Model({ url, animation, position, scale, rotation, initialFacingFront =
   
   // If there's an error loading the model, show an error mesh
   if (modelError) {
+    console.error('Model loading error:', modelError);
     return (
-      <mesh>
-        <sphereGeometry args={[1, 16, 16]} />
-        <meshStandardMaterial color="red" />
-      </mesh>
+      <group>
+        <mesh position={[0, 0, 0]}>
+          <boxGeometry args={[0.8, 1.6, 0.4]} />
+          <meshStandardMaterial color="#4A90E2" />
+        </mesh>
+        <mesh position={[0, 0.9, 0.1]}>
+          <sphereGeometry args={[0.3, 16, 16]} />
+          <meshStandardMaterial color="#FFB6C1" />
+        </mesh>
+        <Html position={[0, -1, 0]} center>
+          <div style={{ 
+            color: 'red', 
+            fontSize: '12px', 
+            textAlign: 'center',
+            background: 'rgba(255,255,255,0.8)',
+            padding: '4px',
+            borderRadius: '4px'
+          }}>
+            Modèle 3D indisponible
+          </div>
+        </Html>
+      </group>
     );
   }
   
