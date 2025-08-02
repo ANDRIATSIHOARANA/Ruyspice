@@ -24,7 +24,7 @@ const config = {
   // Configuration des fonctionnalités
   FEATURES: {
     ENABLE_FIREBASE_AUTH: false, // Désactivé temporairement pour éviter les erreurs
-    ENABLE_3D_CHARACTER: true,
+    ENABLE_3D_CHARACTER: false, // Désactivé temporairement pour Vercel
     ENABLE_CHAT: true,
     ENABLE_NOTIFICATIONS: true
   }

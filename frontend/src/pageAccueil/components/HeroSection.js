@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Character3D from '../../components/Character3D';
+import config from '../../config/config';
 import '../styles/HeroSection.css';
 
 const HeroSection = () => {
@@ -92,24 +93,26 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
-      {/* Personne 3D - Positionnement fixe en haut */}
-      <div className="person-3d-header">
-        <Character3D 
-          ref={characterRef}
-          url="/assets/models/character.fbx"
-          animation={characterAnimation}
-          position={[0, -1.2, 0]}
-          scale={0.012}
-          rotation={[0, 0, 0]} 
-          enableControls={true}
-          initialFacingFront={false}
-          onClick={handleCharacterClick}
-          style={{ width: '100%', height: '100%' }}
-          showGround={false}
-          useFallback={true}
-          highPerformance={true}
-        />
-      </div>
+      {/* Personne 3D - Conditionnellement rendu selon la configuration */}
+      {config.FEATURES.ENABLE_3D_CHARACTER && (
+        <div className="person-3d-header">
+          <Character3D 
+            ref={characterRef}
+            url="/assets/models/character.fbx"
+            animation={characterAnimation}
+            position={[0, -1.2, 0]}
+            scale={0.012}
+            rotation={[0, 0, 0]} 
+            enableControls={true}
+            initialFacingFront={false}
+            onClick={handleCharacterClick}
+            style={{ width: '100%', height: '100%' }}
+            showGround={false}
+            useFallback={true}
+            highPerformance={true}
+          />
+        </div>
+      )}
       
       <div className="hero-wave">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
