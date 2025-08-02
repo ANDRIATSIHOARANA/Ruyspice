@@ -19,9 +19,14 @@ const categorieRoutes = require('../routes/categorieRoutes');
 
 const app = express();
 
-// Configuration CORS pour Vercel
+// Configuration CORS pour Vercel - Accepter tous les domaines Vercel
 app.use(cors({
-  origin: ['https://ruyspice.vercel.app', 'http://localhost:3000'],
+  origin: [
+    'https://ruyspice.vercel.app', 
+    'https://rdv-project-mskrigtg7-tolojanaharys-projects.vercel.app',
+    /^https:\/\/.*\.vercel\.app$/,
+    'http://localhost:3000'
+  ],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization']
