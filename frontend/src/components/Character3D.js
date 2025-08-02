@@ -60,7 +60,7 @@ const RotationControls = ({ onRotateLeft, onRotateRight, onRotateFront }) => {
 };
 
 // Component for the FBX model with proper error handling and caching
-function Model({ url, animation, position, scale, rotation, initialFacingFront = true }) {
+const Model = React.forwardRef(({ url, animation, position, scale, rotation, initialFacingFront = true }, ref) => {
   const group = useRef();
   const [modelError, setModelError] = useState(null);
   const [model, setModel] = useState(null);
@@ -84,13 +84,11 @@ function Model({ url, animation, position, scale, rotation, initialFacingFront =
   };
   
   // Expose rotation functions to parent via ref
-  useEffect(() => {
-    if (group.current) {
-      group.current.rotateLeft = () => rotateModel(-Math.PI / 4);
-      group.current.rotateRight = () => rotateModel(Math.PI / 4);
-      group.current.faceFront = setModelFacingFront;
-    }
-  }, [model, initialFacingFront]);
+  React.useImperativeHandle(ref, () => ({
+    rotateLeft: () => rotateModel(-Math.PI / 4),
+    rotateRight: () => rotateModel(Math.PI / 4),
+    faceFront: setModelFacingFront
+  }), [model, initialFacingFront]);
   
   // Load the FBX model with explicit error handling and caching
   useEffect(() => {
@@ -254,7 +252,7 @@ function Model({ url, animation, position, scale, rotation, initialFacingFront =
       />
     </group>
   );
-}
+});
 
 // Ground component with proper shadow receiving - memoized
 const Ground = React.memo(() => {
@@ -319,7 +317,7 @@ const SimpleCharacter = React.memo(() => {
 });
 
 // Main component that encapsulates the Three.js Canvas - optimized with useMemo
-const Character3D = ({ 
+const Character3D = React.forwardRef(({ 
   url = "/assets/models/character.fbx",
   animation = 'idle', 
   position = [0, 0, 0],
@@ -334,8 +332,27 @@ const Character3D = ({
   shadowMapSize = 1024, // Configurable shadow quality
   initialFacingFront = true, // New prop to control initial facing direction
   useFallback = false // New prop to force using simple character
-}) => {
+}, ref) => {
   const modelRef = useRef();
+  
+  // Expose methods to parent component via ref
+  React.useImperativeHandle(ref, () => ({
+    rotateLeft: () => {
+      if (modelRef.current && modelRef.current.rotateLeft) {
+        modelRef.current.rotateLeft();
+      }
+    },
+    rotateRight: () => {
+      if (modelRef.current && modelRef.current.rotateRight) {
+        modelRef.current.rotateRight();
+      }
+    },
+    faceFront: () => {
+      if (modelRef.current && modelRef.current.faceFront) {
+        modelRef.current.faceFront();
+      }
+    }
+  }), []);
   
   // Memoize canvas props to avoid unnecessary re-renders
   const canvasProps = useMemo(() => ({
@@ -439,7 +456,7 @@ const Character3D = ({
       </Canvas>
     </div>
   );
-};
+});
 
 // Export memoized component to prevent unnecessary re-renders
 export default React.memo(Character3D);
