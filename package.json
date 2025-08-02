@@ -1,6 +1,6 @@
 {
   "name": "rdv-project",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Système de réservation de rendez-vous - Hébergement gratuit",
   "main": "backend/api/index.js",
   "scripts": {
