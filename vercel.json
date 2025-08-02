@@ -8,6 +8,10 @@
         "distDir": ".",
         "zeroConfig": false
       }
+    },
+    {
+      "src": "backend/api/index.js",
+      "use": "@vercel/node"
     }
   ],
   "headers": [
@@ -40,6 +44,10 @@
     }
   ],
   "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/backend/api/index.js"
+    },
     {
       "src": "/static/(.*)",
       "dest": "/static/$1"
